@@ -18,6 +18,28 @@
 						(intersection-set set1 (cdr set2)))))))
 						
 (define (adjoin-set x set)
-	(if (element-of-set? x set)
-		set
-		(cons x set)))
+	(if (null? set)
+		(list x)
+		(let ((current-element (car set))
+				(remain-element (cdr set)))
+			  (cond ((= x current-element)
+					 set)
+					((> x current-element)
+						(cons current-element
+							(adjoin-set x remain-element)))
+					((< x current-element)
+						(cons x set))))))
+						
+(define (union-set set another)
+	(cond ((and (null? set) (null? another))
+			'())
+		  ((null? set) another)
+		  ((null? another) set)
+		  (else 
+			(let ((x (car set)) (y (car another)))
+				(cond ((= x y)
+					(cons x (union-set (cdr set) (cdr another))))
+					((< x y)
+						(cons x (union-set (cdr set) another)))
+					((> x y)
+						(cons y (union-set set (cdr another)))))))))
