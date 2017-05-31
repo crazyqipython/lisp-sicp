@@ -1,0 +1,12 @@
+(define (make-monitored f)
+  (let ((counter 0))
+	(define (dispath message)
+	  (cond ((eq? message 'how-many-calls?)
+		counter)
+	  ((eq? message 'reset-count)
+	   (set! counter 0)
+	    counter)
+	  (else (set! counter (+ 1 counter))
+	    (f message))))
+	dispath))
+	

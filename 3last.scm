@@ -1,0 +1,11 @@
+(define f
+  (let ((internal 0)
+	(calls 0))
+    (lambda (arg)
+      (let ((previous internal))
+	(set! calls (+ calls 1))
+	(if (= calls 2)
+	    (begin (set! internal 0)
+		   (set! calls 0))
+	    (set! internal arg))
+	previous))))
