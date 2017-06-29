@@ -13,4 +13,4 @@
 		    ((eq? m 'deposit) (protected deposit))
 			((eq? m 'balance) balance)
 			(else (error "unknown request"))))
-		dispatch))
+		dispatch))	
